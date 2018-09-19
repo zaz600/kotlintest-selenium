@@ -2,6 +2,7 @@ package io.github.zaz600
 
 import io.kotlintest.data.forall
 import io.kotlintest.extensions.TestListener
+import io.kotlintest.matchers.boolean.shouldBeFalse
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 import io.kotlintest.tables.row
@@ -9,7 +10,6 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.support.ui.WebDriverWait
 import java.util.concurrent.TimeUnit
-
 
 
 class TestSignup : StringSpec(), TestListener {
@@ -47,7 +47,7 @@ class TestSignup : StringSpec(), TestListener {
                     sendKeys(str32)
                 }
                 password.click()
-                invalidLoginLengthDiv.isDisplayed.shouldBe(false)
+                invalidLoginLengthDiv.isDisplayed.shouldBeFalse()
                 emailInput.getAttribute("value").shouldBe(str31)
             }
         }
