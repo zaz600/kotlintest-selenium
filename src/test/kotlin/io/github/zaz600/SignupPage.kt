@@ -20,6 +20,9 @@ class SignupPage(private val driver: WebDriver) {
     @FindBy(name = "password")
     lateinit var password: WebElement
 
+    @FindBy(name = "password_retry")
+    lateinit var passwordRetry: WebElement
+
     @FindBy(css = "div[class~='js-invalid_login_invalid_length']")
     lateinit var invalidLoginLengthDiv: WebElement
 

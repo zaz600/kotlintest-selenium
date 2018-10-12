@@ -8,12 +8,21 @@ import io.kotlintest.specs.StringSpec
 import io.kotlintest.tables.row
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.support.ui.WebDriverWait
 import java.util.concurrent.TimeUnit
 
+fun createWebDriver() : WebDriver{
+    val op = ChromeOptions()
+    op.addArguments("test-type")
+    op.setAcceptInsecureCerts(true)
+    op.setHeadless(true)
+    return ChromeDriver(op)
+}
+
 
 class TestSignup : StringSpec(), TestListener {
-    private val driver: WebDriver = autoClose(WebDriverCloseable(ChromeDriver()))
+    private val driver: WebDriver = autoClose(WebDriverCloseable(createWebDriver()))
     private val signupPage = SignupPage(driver)
     private val wait = WebDriverWait(driver, 10)
 
@@ -74,7 +83,7 @@ class TestSignup : StringSpec(), TestListener {
                         clear()
                         sendKeys(email)
                     }
-                    password.click()
+                    passwordRetry.click()
                     wait.until { invalidLoginCharsDiv.isDisplayed }
                 }
             }
